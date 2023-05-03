@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useEventListener, useHuddle01 } from "@huddle01/react";
 import { Audio, Video } from "@huddle01/react/components";
 
-import { CreateRoom } from "@/handler/CreateRoom";
+import { CreateRoom } from "../handler/CreateRoom";
 import Image from "next/image";
 /* Uncomment to see the Xstate Inspector */
 // import { Inspect } from '@huddle01/react/components';
