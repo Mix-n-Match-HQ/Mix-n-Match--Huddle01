@@ -110,7 +110,7 @@ export default function Home() {
   //appwrite
   const client = new Client();
   client
-    .setEndpoint("http://146.190.10.186/v1")
+    .setEndpoint("https://mixnmatch.fun/v1")
     .setProject("642aac578c4ef4b7389f");
   const databases = new Databases(client);
   const handleFind = async () => {
