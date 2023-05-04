@@ -112,7 +112,8 @@ export default function Home() {
   const bg = query.bg;
   const btn = query.btn ? query.btn : "bg-blue-500";
   const txt = query.txt ? query.txt : "text-white"
-
+  const cname = query.cname ? query.cname : ""
+  const titlecolor = query.titlecolor ? query.titlecolor : "text-white"
   
 
   //appwrite
@@ -351,7 +352,7 @@ export default function Home() {
   return (
     <>
     <div className={` ${bg}  h-screen`}>
-      <div class="fixed top-0 left-0">
+      <div className={`flex items-center ${titlecolor} fixed top-0 left-0`}>
         <div className="p-4" >
           <Image
           className="rounded-2xl"
@@ -361,6 +362,7 @@ export default function Home() {
             height={50}
           />
         </div> 
+        <span className="text-2xl font-bold ml-2">{cname}</span>
       </div>
       {renderSwitch(renderState)}
       </div>
