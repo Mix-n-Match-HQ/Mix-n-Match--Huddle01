@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/router";
 
 import { useEventListener, useHuddle01 } from "@huddle01/react";
 import { Audio, Video } from "@huddle01/react/components";
@@ -65,10 +66,6 @@ export default function Home() {
     }
   });
 
-  useEventListener("room:peer-left", async () => {
-    console.log(">>>>>>>...  USER LEFT >>>>>>>>>>");
-  });
-
   // useEventListener("room:joined", async () => {
   //   await sleep(2000);
   //   if(produceAudio.isCallable){
@@ -106,6 +103,17 @@ export default function Home() {
 
   const [primaryColor, setPrimaryColor] = useState("#004e92");
   const [secondaryColor, setSecondaryColor] = useState("#002c5b");
+
+
+  // UI Colors 
+
+  const router = useRouter();
+  const query = router.query;
+  const bg = query.bg;
+  const btn = query.btn ? query.btn : "bg-blue-500";
+  const txt = query.txt ? query.txt : "text-white"
+
+  
 
   //appwrite
   const client = new Client();
@@ -184,11 +192,9 @@ export default function Home() {
   const handleJoin = async () => {
     if (state.matches("Idle")) {
       initialize("KL1r3E1yHfcrRbXsT4mcE-3mK60Yc3YR");
-      console.log("->>>>>****>>>>>>>    initialized");
     }
     if (joinLobby.isCallable) {
       joinLobby(roomId);
-      console.log("->>>>>****>>>>>>>    joinedLobby");
     }
   };
 
@@ -219,14 +225,14 @@ export default function Home() {
     return (
       <div className="flex justify-center text-3xl items-center h-screen">
         <center>
-          <Button onClick={handleFind}>Find Strangers</Button>
+          <button className={`${btn} ${txt} px-6 py-2 rounded-lg`} onClick={handleFind}>Find Strangers</button>
         </center>
       </div>
     );
   };
   const renderFinder = () => {
     return (
-      <div className="flex justify-center text-3xl items-center h-screen text-white">
+      <div className={`flex justify-center text-3xl items-center h-screen ${txt}`}>
         <center>
           <h1>{findStatus}</h1>
         </center>
@@ -236,7 +242,7 @@ export default function Home() {
   const renderJoining = () => {
     handleJoin();
     return (
-      <div className="flex justify-center text-3xl items-center h-screen text-white">
+      <div className={`flex justify-center text-3xl items-center h-screen ${txt}`}>
         <center>
           <h1>Got a Match, Joining...</h1>
         </center>
@@ -252,68 +258,11 @@ export default function Home() {
             x
           </button>
         </div>
-        {/* 
-        <div>
-          <Button
-            disabled={!state.matches("Idle")}
-            onClick={() => initialize("KL1r3E1yHfcrRbXsT4mcE-3mK60Yc3YR")}
-          >
-            INIT
-          </Button>
-
-          <br />
-          <br />
-          <h2 className="text-3xl text-red-500 font-extrabold">Initialized</h2>
-          <Button
-            disabled={!joinLobby.isCallable}
-            onClick={() => {
-              joinLobby("yxe-nnje-htc");
-            }}
-          >
-            JOIN_LOBBY
-          </Button>
-
-          <br />
-          <h2 className="text-3xl text-green-600 font-extrabold">Room</h2>
-          <div className="flex gap-4 flex-wrap">
-            <Button
-              disabled={!produceAudio.isCallable}
-              onClick={() => produceAudio(micStream)}
-            >
-              PRODUCE_MIC
-            </Button>
-
-            <Button
-              disabled={!produceVideo.isCallable}
-              onClick={() => produceVideo(camStream)}
-            >
-              PRODUCE_CAM
-            </Button>
-
-            <Button
-              disabled={!stopProducingAudio.isCallable}
-              onClick={() => stopProducingAudio()}
-            >
-              STOP_PRODUCING_MIC
-            </Button>
-
-            <Button
-              disabled={!stopProducingVideo.isCallable}
-              onClick={() => stopProducingVideo()}
-            >
-              STOP_PRODUCING_CAM
-            </Button>
-
-            <Button disabled={!leaveRoom.isCallable} onClick={leaveRoom}>
-              LEAVE_ROOM
-            </Button>
-          </div>
-        </div> */}
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="pr-8 pb-1 pl-8  md:pl-16 mx-auto ">
             <div className="relative">
               <video
-                className="md:h-96 w-full h-56  object-cover border-yellow-500 border-double border-4 rounded-2xl"
+                className="md:h-96 w-full h-56  object-cover border-white border-double border-4 rounded-2xl"
                 ref={videoRef}
                 autoPlay
                 muted
@@ -325,7 +274,7 @@ export default function Home() {
                   </div> */}
                   <button
                     onClick={revealFace}
-                    className="bg-yellow-500 text-black px-4 py-2 rounded"
+                    className={`${btn} ${txt} px-4 py-2 rounded`}
                   >
                     Reveal Face
                   </button>
@@ -343,7 +292,7 @@ export default function Home() {
               {peers[peerIds[0]] && peers[peerIds[0]].cam && (
                 <>
                   <Video
-                    className="md:h-96 w-full h-56  object-cover border-yellow-500 border-double border-4 rounded-2xl"
+                    className="md:h-96 w-full h-56  object-cover border-white border-double border-4 rounded-2xl"
                     peerId={peerIds[0]}
                     track={peers[peerIds[0]].cam}
                   ></Video>
@@ -397,8 +346,11 @@ export default function Home() {
     console.log(peerIds.length);
   }, [peerIds]);
 
+  //bg-gradient-to-b ${bg} to-purple-500 h-screen
+
   return (
     <>
+    <div className={` ${bg}  h-screen`}>
       <div class="fixed top-0 left-0">
         <div className="p-4" >
           <Image
@@ -411,6 +363,7 @@ export default function Home() {
         </div> 
       </div>
       {renderSwitch(renderState)}
+      </div>
     </>
   );
 }
