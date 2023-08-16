@@ -22,7 +22,8 @@ The advantages of using an iframe include:
 ### 👇click below to watch demo video 
 [![DEMO](https://img.youtube.com/vi/KFZSQiSsYu0/2.jpg)](https://www.youtube.com/watch?v=KFZSQiSsYu0)
 
-![ezgif-2-5fa2077a2c](https://user-images.githubusercontent.com/32412967/236345529-3104e19c-7444-4c3d-bde8-571a3c7c78c9.gif)
+![ezgif-2-5fa2077a2c](![WhoIsThis (1)](https://github.com/nikhilverma360/Water-Overflow-Tracker/assets/32412967/314091a6-5be1-44be-934a-d740230c40ee)
+)
 ![App Landing Page](https://user-images.githubusercontent.com/32412967/236348351-70362849-6b7c-492d-9361-5c7f9aeca4a4.png)
 
 
